@@ -1,4 +1,4 @@
-# 프로젝트명
+# 프로젝트명 : Cube Solver
 
 📢 2025년 여름학기 [AIKU](https://github.com/AIKU-Official) 활동으로 진행한 프로젝트입니다
 
