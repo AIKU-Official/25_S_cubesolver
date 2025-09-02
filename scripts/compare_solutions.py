@@ -31,28 +31,38 @@ def print_results(results):
 def main():
     # parse arguments
     parser: ArgumentParser = ArgumentParser()
-    parser.add_argument('--soln1', type=str, required=True, help="")
-    parser.add_argument('--soln2', type=str, required=True, help="")
+    parser.add_argument('--soln1', type=str, required=True, help="Ground truth file")
+    parser.add_argument('--soln2', type=str, required=True, help="A* results file")
 
     args = parser.parse_args()
 
     results1 = pickle.load(open(args.soln1, "rb"))
     results2 = pickle.load(open(args.soln2, "rb"))
 
-    lens1 = np.array([len(x) for x in results1["solutions"]])
+    if 'costs' in results1:
+        lens1 = np.array(results1['costs'])
+        print(f"Loaded optimal lengths from '{args.soln1}' using 'costs' key.")
+    elif 'solutions' in results1:
+        lens1 = np.array([len(x) for x in results1["solutions"]])
+        print(f"Loaded optimal lengths from '{args.soln1}' using 'solutions' key.")
+    else:
+        raise KeyError(f"Could not find 'costs' or 'solutions' in {args.soln1}")
+
+    # 두 번째 파일(soln2)은 항상 'solutions' 키를 가지고 있어야 합니다.
+    if 'solutions' not in results2:
+        raise KeyError(f"Could not find 'solutions' in {args.soln2}")
     lens2 = np.array([len(x) for x in results2["solutions"]])
 
-    print("%i states" % (len(results1["states"])))
+    print(f"\nTotal puzzles: {len(lens1)}")
 
-    print("\n--SOLUTION 1---")
-    print_results(results1)
-
-    print("\n--SOLUTION 2---")
+    # 첫 번째 파일은 통계 정보가 없으므로, 두 번째 파일의 상세 정보만 출력합니다.
+    print(f"\n--- A* Search Results ({args.soln2}) ---")
     print_results(results2)
 
-    print("\n\n------Solution 2 - Solution 1 Lengths-----")
+    # 두 결과의 해답 길이를 비교합니다.
+    print("\n\n------ Comparison: (A* Lengths) - (Optimal Lengths) -----")
     print_stats(lens2 - lens1, hist=False)
-    print("%.2f%% soln2 equal to soln1" % (100 * np.mean(lens2 == lens1)))
+    print(f"{100 * np.mean(lens2 == lens1):.2f}% of puzzles solved optimally.")
 
 
 if __name__ == "__main__":

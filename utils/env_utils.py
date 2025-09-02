@@ -1,7 +1,7 @@
 import re
 import math
 from environments.environment_abstract import Environment
-
+from environments.cube2 import Cube2
 
 def get_environment(env_name: str) -> Environment:
     env_name = env_name.lower()
@@ -22,6 +22,8 @@ def get_environment(env_name: str) -> Environment:
     elif env_name == 'sokoban':
         from environments.sokoban import Sokoban
         env = Sokoban(10, 4)
+    elif env_name == 'cube2':
+        return Cube2()
     else:
         raise ValueError('No known environment %s' % env_name)
 

@@ -1,0 +1,14 @@
+127.0.0.1 - - [01/Sep/2025 08:00:38] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:00:44] "GET /health HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:01:53] "GET /solve?mode=moves&scramble_moves=U1%2CB-1%2CL-1%2CD-1%2CB-1%2CL1%2CR1%2CU1%2CB1%2CU-1%2CB1%2CU1%2CF1%2CD-1%2CB1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:05:53] "GET /solve?mode=moves&scramble_moves=R-1%2CB-1%2CF1%2CU-1%2CR-1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:06:01] "GET /solve?mode=moves&scramble_moves=U1%2CL1%2CD-1%2CB1%2CF-1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:06:06] "GET /solve?mode=moves&scramble_moves=F-1%2CU1%2CD1%2CL1%2CF-1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:06:13] "GET /solve?mode=moves&scramble_moves=L1%2CU-1%2CR-1%2CD1%2CB-1%2CU1%2CF-1%2CR-1%2CB-1%2CF1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:06:50] "GET /solve?mode=moves&scramble_moves=F-1%2CB1%2CR-1%2CF-1%2CD1%2CR1%2CU-1%2CB1%2CL-1%2CF-1%2CB1%2CL1%2CU-1%2CL-1%2CD-1 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Sep/2025 08:07:13] "GET /solve?mode=moves&scramble_moves=R1 HTTP/1.1" 200 -
+/tmp/tmp417pb_fn: line 3: 1356109 Killed                  python -u scripts/cube2_http_server.py --host 0.0.0.0 --port 8099
+
+ERROR conda.cli.main_run:execute(125): `conda run python -u scripts/cube2_http_server.py --host 0.0.0.0 --port 8099` failed. (See above for error)
+[Cube2HTTP] Listening on http://0.0.0.0:8099
+

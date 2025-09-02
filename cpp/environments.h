@@ -144,4 +144,48 @@ class Cube4: public Environment {
     virtual int getNumActions() const;
 };
 
+class Cube2: public Environment {
+private:
+    static const int numActions = 12;
+    static constexpr int stickersPerMove = 12;
+    static constexpr int totalStickers = 24;
+    static constexpr int rotateIdxs_old[numActions][stickersPerMove] = {
+        {2, 0, 3, 1, 16, 17, 12, 13, 20, 21, 8, 9},   // U-1 (U')
+        {1, 3, 0, 2, 20, 21, 8, 9, 16, 17, 12, 13},   // U1 (U)
+        {6, 4, 7, 5, 22, 23, 14, 15, 18, 19, 10, 11}, // D-1 (D')
+        {5, 7, 4, 6, 10, 11, 18, 19, 14, 15, 22, 23}, // D1 (D)
+        {10, 8, 11, 9, 2, 3, 22, 20, 6, 7, 17, 19},   // L-1 (L')
+        {9, 11, 8, 10, 17, 19, 6, 7, 22, 20, 2, 3},   // L1 (L)
+        {14, 12, 15, 13, 1, 0, 16, 18, 4, 5, 21, 23}, // R-1 (R')
+        {13, 15, 12, 14, 21, 23, 4, 5, 16, 18, 1, 0}, // R1 (R)
+        {18, 16, 19, 17, 0, 2, 9, 11, 5, 4, 13, 15},   // B-1 (B')
+        {17, 19, 16, 18, 13, 15, 5, 4, 9, 11, 0, 2},   // B1 (B)
+        {22, 20, 23, 21, 3, 1, 12, 14, 7, 6, 10, 8},   // F-1 (F')
+        {21, 23, 20, 22, 10, 8, 7, 6, 12, 14, 3, 1}    // F1 (F)
+    };
+    static constexpr int rotateIdxs_new[numActions][stickersPerMove] = {
+        {0, 2, 1, 3, 8, 9, 16, 17, 12, 13, 20, 21},   // U-1 (U')
+        {0, 2, 1, 3, 8, 9, 16, 17, 12, 13, 20, 21},   // U1 (U)
+        {4, 6, 5, 7, 10, 11, 18, 19, 14, 15, 22, 23}, // D-1 (D')
+        {4, 6, 5, 7, 22, 23, 14, 15, 18, 19, 10, 11}, // D1 (D)
+        {8, 10, 9, 11, 17, 19, 2, 3, 22, 20, 6, 7},   // L-1 (L')
+        {8, 10, 9, 11, 2, 3, 22, 20, 6, 7, 17, 19},   // L1 (L)
+        {12, 14, 13, 15, 21, 23, 1, 0, 16, 18, 4, 5}, // R-1 (R')
+        {12, 14, 13, 15, 1, 0, 16, 18, 4, 5, 21, 23}, // R1 (R)
+        {16, 18, 17, 19, 13, 15, 0, 2, 9, 11, 5, 4},   // B-1 (B')
+        {16, 18, 17, 19, 0, 2, 9, 11, 5, 4, 13, 15},   // B1 (B)
+        {20, 22, 21, 23, 10, 8, 3, 1, 12, 14, 7, 6},   // F-1 (F')
+        {20, 22, 21, 23, 3, 1, 12, 14, 7, 6, 10, 8}    // F1 (F)
+    };
 
+    std::vector<uint8_t> state;
+public:
+    Cube2(std::vector<uint8_t> state);
+    ~Cube2();
+    
+    virtual Cube2 *getNextState(int action) const;
+    virtual std::vector<Environment*> getNextStates() const;
+    virtual std::vector<uint8_t> getState() const;
+    virtual bool isSolved() const;
+    virtual int getNumActions() const;
+};

@@ -369,3 +369,50 @@ int Cube4::getNumActions() const {
 	return(this->numActions);
 }
 
+/// Cube2
+// Sticker indices for 2x2 cube rotations
+Cube2::Cube2(std::vector<uint8_t> state) {
+    this->state = state;
+}
+
+Cube2::~Cube2() {}
+
+Cube2 *Cube2::getNextState(const int action) const {
+    std::vector<uint8_t> newState(this->state);
+    
+    for (int i=0; i<this->stickersPerMove; i++) {
+        const int oldIdx = this->rotateIdxs_old[action][i];
+        const int newIdx = this->rotateIdxs_new[action][i];
+        newState[newIdx] = this->state[oldIdx];
+    }
+
+    Cube2 *nextState = new Cube2(newState);
+
+    return(nextState);
+}
+
+std::vector<Environment*> Cube2::getNextStates() const {
+    std::vector<Environment*> nextStates;
+    for (int i=0; i<numActions; i++) {
+        nextStates.push_back(this->getNextState(i));
+    }
+
+    return(nextStates);
+}
+
+std::vector<uint8_t> Cube2::getState() const {
+    return(this->state);
+}
+
+bool Cube2::isSolved() const {
+    bool isSolved = true;
+    for (int i=0; i<this->totalStickers; i++) {
+        isSolved = isSolved & (this->state[i] == i);
+    }
+
+    return(isSolved);
+}
+
+int Cube2::getNumActions() const {
+    return(this->numActions);
+}
