@@ -1,0 +1,1 @@
+# 25_S_cubesolver
